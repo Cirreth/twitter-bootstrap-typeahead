@@ -51,7 +51,8 @@ function ($) {
         this.select = this.options.select || this.select;
         this.sorter = this.options.sorter || this.sorter;
         this.source = this.options.source || this.source;        
-                
+        this.resultCollection = this.options.resultCollection;
+
         if (!this.source.length) {
             var ajax = this.options.ajax;
 
@@ -173,7 +174,11 @@ function ($) {
             }
 
             // Save for selection retreival
-            this.ajax.data = data;
+            if (this.resultCollection) {
+                this.ajax.data = data[resultCollection];
+            } else {
+                this.ajax.data = data;
+            }
 
             items = this.grepper(this.ajax.data);
     
